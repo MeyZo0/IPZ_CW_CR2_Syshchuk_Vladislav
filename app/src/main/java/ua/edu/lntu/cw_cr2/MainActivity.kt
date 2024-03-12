@@ -3,18 +3,27 @@ package ua.edu.lntu.cw_cr2
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ua.edu.lntu.cw_cr2.ui.theme.IPZ_CW_CR2_Syshchuk_VladislavTheme
+import java.net.PasswordAuthentication
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,20 +41,30 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainWindow(modifier: Modifier = Modifier) {
-    Column {
-        Text(
-            text = "Sing in",
-            fontSize = 30.sp,
-            modifier = modifier
-        )
+    var emailValue by remember { mutableStateOf("") }
+    var passworValue by remember { mutableStateOf("") }
 
-        TextField(value = "email", onValueChange = {})
-        TextField(value = "Password", onValueChange = {})
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+
+    ) {
+        Text(
+            text = "Sign In",
+            fontSize = 30.sp,
+        )
+        TextField(
+            value = emailValue,
+            onValueChange = { newText -> emailValue = newText }
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        TextField(
+            value = passworValue,
+            onValueChange = { newText -> passworValue = newText },
+        )
         Button(
-            onClick = { /* ... */ }
-        ) {
-            Text("sign in")
+            onClick = { /*TODO*/ }) {
+            Text(text = "Sign In")
         }
     }
-
 }
