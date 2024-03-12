@@ -41,7 +41,11 @@ fun MainWindow(modifier: Modifier = Modifier) {
 
         TextField(value = "email", onValueChange = {})
         TextField(value = "Password", onValueChange = {})
-        
+        Button(
+            onClick = { /* ... */ }
+        ) {
+            Text("sign in")
+        }
     }
 
 }
