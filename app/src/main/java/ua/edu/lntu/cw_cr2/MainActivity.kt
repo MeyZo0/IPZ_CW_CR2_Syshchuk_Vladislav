@@ -41,30 +41,51 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainWindow(modifier: Modifier = Modifier) {
+    var currentState by remember { mutableStateOf(1) }
     var emailValue by remember { mutableStateOf("") }
     var passworValue by remember { mutableStateOf("") }
+    when (currentState) {
+        1 ->Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
 
-    Column(
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = "Sign In",
+                fontSize = 30.sp,
+            )
+            TextField(
+                value = emailValue,
+                onValueChange = { newText -> emailValue = newText }
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            TextField(
+                value = passworValue,
+                onValueChange = { newText -> passworValue = newText },
+            )
+            Button(
+                onClick = { if ( (emailValue != "") && passworValue != ""){
+                    currentState = 2
+                } }) {
+                Text(text = "Sign In")
+            }
+        }
 
-    ) {
-        Text(
-            text = "Sign In",
-            fontSize = 30.sp,
-        )
-        TextField(
-            value = emailValue,
-            onValueChange = { newText -> emailValue = newText }
-        )
-        Spacer(modifier = Modifier.height(10.dp))
-        TextField(
-            value = passworValue,
-            onValueChange = { newText -> passworValue = newText },
-        )
-        Button(
-            onClick = { /*TODO*/ }) {
-            Text(text = "Sign In")
+        2 -> Column {
+            Text(
+                text = "Sign In success",
+                fontSize = 30.sp,
+            )
+            Text(
+                text = emailValue,
+                fontSize = 30.sp,
+            )
+            Button(
+                onClick = { currentState = 1 }) {
+                Text(text = "sign out")
+            }
         }
     }
+
+
 }
